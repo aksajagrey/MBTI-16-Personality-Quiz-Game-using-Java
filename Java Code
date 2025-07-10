@@ -1,1 +1,136 @@
+import java.util.Scanner;
 
+public class MBTIPersonalityQuiz {
+    // MBTI trait counters
+    static int E = 0, I = 0;
+    static int S = 0, N = 0;
+    static int T = 0, F = 0;
+    static int J = 0, P = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("===== MBTI 16 Personality Quiz =====");
+        System.out.println("Answer the following 15 questions honestly.\nType 'a' to agree or 'b' to disagree.\n");
+
+        // Questions for each trait
+        askQuestion(scanner, "You enjoy vibrant social events with lots of people.", 'E', 'I');
+        askQuestion(scanner, "You often spend time exploring unrealistic yet intriguing ideas.", 'N', 'S');
+        askQuestion(scanner, "You rely more on logic than emotions when making decisions.", 'T', 'F');
+        askQuestion(scanner, "You prefer to have a detailed plan than be spontaneous.", 'J', 'P');
+        askQuestion(scanner, "You feel comfortable in large groups of people.", 'E', 'I');
+        askQuestion(scanner, "You focus more on the reality of how things are than imagining how they could be.", 'S', 'N');
+        askQuestion(scanner, "You think being rational is more important than being compassionate.", 'T', 'F');
+        askQuestion(scanner, "You like having things decided rather than going with the flow.", 'J', 'P');
+        askQuestion(scanner, "You find it easy to approach strangers and start a conversation.", 'E', 'I');
+        askQuestion(scanner, "You are more interested in abstract theories than real-world examples.", 'N', 'S');
+        askQuestion(scanner, "You make decisions with your head rather than your heart.", 'T', 'F');
+        askQuestion(scanner, "You prefer to stick to a schedule.", 'J', 'P');
+        askQuestion(scanner, "You gain energy from social interactions.", 'E', 'I');
+        askQuestion(scanner, "You prefer to rely on experience rather than intuition.", 'S', 'N');
+        askQuestion(scanner, "You tend to follow your emotions more than logic.", 'F', 'T');
+
+        // Determine final MBTI type
+        String mbtiType = "" +
+                (E >= I ? "E" : "I") +
+                (S >= N ? "S" : "N") +
+                (T >= F ? "T" : "F") +
+                (J >= P ? "J" : "P");
+
+        System.out.println("\nYour MBTI Personality Type is: " + mbtiType);
+        printPersonalityDescription(mbtiType);
+
+        scanner.close();
+    }
+
+    // Ask a single question
+    static void askQuestion(Scanner scanner, String question, char traitA, char traitB) {
+        System.out.println(question);
+        System.out.println("a) Agree");
+        System.out.println("b) Disagree");
+        System.out.print("Your answer (a/b): ");
+        char answer = scanner.next().toLowerCase().charAt(0);
+
+        if (answer == 'a') {
+            incrementTrait(traitA);
+        } else if (answer == 'b') {
+            incrementTrait(traitB);
+        } else {
+            System.out.println("Invalid input. Skipping question.");
+        }
+
+        System.out.println();
+    }
+
+    // Update trait counters
+    static void incrementTrait(char trait) {
+        switch (trait) {
+            case 'E': E++; break;
+            case 'I': I++; break;
+            case 'S': S++; break;
+            case 'N': N++; break;
+            case 'T': T++; break;
+            case 'F': F++; break;
+            case 'J': J++; break;
+            case 'P': P++; break;
+        }
+    }
+
+    // Print basic personality description
+    static void printPersonalityDescription(String type) {
+        System.out.println("Description for type " + type + ":");
+
+        switch (type) {
+            case "INTJ":
+                System.out.println("The Architect: Strategic, logical, and independent thinkers.");
+                break;
+            case "ENTP":
+                System.out.println("The Debater: Energetic, creative, and curious problem-solvers.");
+                break;
+            case "INFJ":
+                System.out.println("The Advocate: Quiet and idealistic visionaries.");
+                break;
+            case "ENFP":
+                System.out.println("The Campaigner: Enthusiastic, imaginative, and free-spirited.");
+                break;
+            case "ISTJ":
+                System.out.println("The Logistician: Practical, reliable, and fact-minded.");
+                break;
+            case "ISFJ":
+                System.out.println("The Defender: Protective, warm, and responsible.");
+                break;
+            case "ESTJ":
+                System.out.println("The Executive: Organized, loyal, and value tradition.");
+                break;
+            case "ESFJ":
+                System.out.println("The Consul: Caring, social, and eager to help.");
+                break;
+            case "INTP":
+                System.out.println("The Logician: Inventive, analytical, and quiet thinkers.");
+                break;
+            case "ENTJ":
+                System.out.println("The Commander: Confident, bold, and strategic leaders.");
+                break;
+            case "INFP":
+                System.out.println("The Mediator: Reflective, creative, and deeply empathetic.");
+                break;
+            case "ENFJ":
+                System.out.println("The Protagonist: Charismatic, altruistic, and inspiring leaders.");
+                break;
+            case "ISTP":
+                System.out.println("The Virtuoso: Bold, practical, and hands-on problem solvers.");
+                break;
+            case "ISFP":
+                System.out.println("The Adventurer: Artistic, spontaneous, and quiet.");
+                break;
+            case "ESTP":
+                System.out.println("The Entrepreneur: Energetic, outgoing, and risk-takers.");
+                break;
+            case "ESFP":
+                System.out.println("The Entertainer: Fun-loving, enthusiastic, and people-focused.");
+                break;
+            default:
+                System.out.println("Unknown type. You might be truly unique!");
+        }
+    }
+}
